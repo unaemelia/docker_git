@@ -27,5 +27,6 @@ jobs:
           run: docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN}}
 
         - name: Build and push docker image
-          run: docker build -t unaarna/docker_git .
-               docker push unaarna/docker_git
+          run: |
+            docker build -t unaarna/docker_git .
+            docker push unaarna/docker_git
