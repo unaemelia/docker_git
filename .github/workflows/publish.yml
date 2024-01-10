@@ -1,0 +1,27 @@
+name: Publish Docker image
+
+on:
+    push:
+        branches:
+            - main
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+
+        steps:
+        - name: Checkout respository
+          uses: actions/checkout@v3
+
+        - name: Set up .net
+          uses: actions/setup-dotnet@v3
+          with: 
+            dotnet-version: '6.x'
+
+        - name: Restore and build
+          run: |
+            dotnet restore
+            dotnet build
+
+        - name: Build docker image
+          run: docker build -t unaarna/docker_git .
